@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+require 'xcode_server_toolkit'
+include XcodeServerToolkit
+begin
+  cli = CLI.new(ENV, ARGV)
+  cli.execute
+rescue UsageError => usage_error
+  STDERR.puts "Error: #{usage_error}"
+  cli.print_usage
+  exit 1
+rescue RuntimeError => cli_error
+  STDERR.puts "Error: #{cli_error}"
+  exit 1
+end
